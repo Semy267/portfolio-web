@@ -8,6 +8,7 @@ import {
   SocialLink,
   PaginatedResponse,
   HomepageData,
+  PortfolioTheme,
 } from "@/types/portfolio";
 
 export const useGetProfile = () => {
@@ -116,4 +117,26 @@ export const useGetHomepage = () => {
     isLoading,
     error,
   };
+};
+
+export const useGetTheme = () => {
+  const { data, isLoading, error } = useQuery<IResponse<PortfolioTheme>>({
+    queryKey: ["public", "theme"],
+    queryFn: () => Apis.theme.get(),
+  });
+
+  return {
+    theme: data?.data || null,
+    isLoading,
+    error,
+  };
+};
+
+export const fetchThemeSettings = async (): Promise<PortfolioTheme | null> => {
+  try {
+    const res = await Apis.theme.get();
+    return res.data || null;
+  } catch {
+    return null;
+  }
 };

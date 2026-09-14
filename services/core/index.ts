@@ -7,6 +7,7 @@ import {
   SocialLink,
   PaginatedResponse,
   HomepageData,
+  PortfolioTheme,
 } from "@/types/portfolio";
 
 export const Apis = {
@@ -55,6 +56,10 @@ export const Apis = {
 
   homepage: {
     get: () => Http.get<IResponse<HomepageData>>("/api/v1/homepage"),
+  },
+
+  theme: {
+    get: () => Http.get<IResponse<PortfolioTheme>>("/api/v1/theme"),
   },
 
   todos: {

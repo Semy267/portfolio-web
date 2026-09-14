@@ -7,6 +7,8 @@ import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import Query from "@/components/shared/layout/query";
 import { AuthProvider } from "@/components/shared/auth/auth-context";
+import { fetchThemeSettings } from "@/services/portfolioService";
+import { generateDynamicThemeCss } from "@/lib/theme";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -27,13 +29,24 @@ export const metadata: Metadata = {
     "Personal portfolio showcasing software engineering projects, technical skills, and journey.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = await fetchThemeSettings();
+  const themeCss = generateDynamicThemeCss(theme);
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {themeCss && (
+          <style
+            id="dynamic-theme"
+            dangerouslySetInnerHTML={{ __html: themeCss }}
+          />
+        )}
+      </head>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} font-[family-name:var(--font-space-grotesk)] antialiased min-h-screen flex flex-col`}
       >

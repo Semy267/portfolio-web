@@ -105,3 +105,17 @@ export interface HomepageData {
   experiences: Experience[];
   socialLinks: SocialLink[];
 }
+
+export interface PortfolioTheme {
+  id: string;
+  primaryColor?: string | null;
+  secondaryColor?: string | null;
+  backgroundColor?: string | null;
+  surfaceColor?: string | null;
+  textColor?: string | null;
+  borderColor?: string | null;
+  borderWidth?: string | null;
+  shadowX?: string | null;
+  shadowY?: string | null;
+  borderRadius?: string | null;
+}

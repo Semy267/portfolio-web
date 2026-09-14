@@ -2,6 +2,12 @@
 
 all notable changes to this project will be documented in this file.
 
+# [1.7.0] - 2026-09-14
+
+- (feat) - Phase 5 Appearance: Added dynamic CSS variables injection in RootLayout from backend ThemeSettings.
+- (feat) - Added `fetchThemeSettings` and `generateDynamicThemeCss` supporting customizable palette, borders, and shadows.
+- (feat) - Added `useGetTheme` public query hook and updated portfolio types.
+
 # [1.6.0] - 2026-09-14
 
 - (feat) - Implemented personal neo-brutalist portfolio website consuming backend API dynamically.
