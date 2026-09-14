@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, ExternalLink, FolderGit2 } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Card,
   CardHeader,
@@ -27,7 +28,13 @@ export default function SelectedProjectsSection({
   isLoading,
 }: SelectedProjectsSectionProps) {
   return (
-    <section className="py-20 border-b-2 border-border bg-card/40">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="py-20 border-b-2 border-border bg-card/40"
+    >
       <div className="container space-y-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
@@ -140,6 +147,7 @@ export default function SelectedProjectsSection({
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-foreground transition-colors p-1"
                         title="Live Demo"
+                        aria-label="Live Demo"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -151,6 +159,6 @@ export default function SelectedProjectsSection({
           </div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 }

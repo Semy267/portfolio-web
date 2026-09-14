@@ -107,6 +107,8 @@ declare type CImage = {
   fill?: boolean;
   rounded?: string;
   additional?: string;
+  priority?: boolean;
+  sizes?: string;
 };
 
 declare interface IDynamicList {

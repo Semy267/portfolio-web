@@ -1,41 +1,63 @@
-"use client";
+import { Metadata } from "next";
+import { configs } from "@/lib/config";
+import HomeClient from "./home-client";
+import { HomepageData } from "@/types/portfolio";
 
-import { useGetHomepage } from "@/services/portfolioService";
-import HeroSection from "@/components/module/home/hero-section";
-import SelectedProjectsSection from "@/components/module/home/selected-projects-section";
-import AboutSection from "@/components/module/home/about-section";
-import SkillsSection from "@/components/module/home/skills-section";
-import JourneySection from "@/components/module/home/journey-section";
-import ContactCtaSection from "@/components/module/home/contact-cta-section";
+export const revalidate = 3600; // Revalidate every hour
 
-export default function Home() {
-  const { homepageData, isLoading } = useGetHomepage();
+export async function generateMetadata(): Promise<Metadata> {
+  let title = "Personal Portfolio";
+  let description =
+    "Personal portfolio showcasing software engineering projects, technical skills, and journey.";
 
-  const profile = homepageData?.profile || null;
-  const projects = homepageData?.featuredProjects || [];
-  const skills = homepageData?.skills || [];
-  const experiences = homepageData?.experiences || [];
-  const socialLinks = homepageData?.socialLinks || [];
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/api/v1/homepage`,
+      {
+        next: { revalidate: 3600 },
+      },
+    );
+    const { data } = await res.json();
+    if (data?.profile) {
+      title = `${data.profile.name} | Portfolio`;
+      if (data.profile.bio) {
+        description = data.profile.bio;
+      }
+    }
+  } catch (error) {
+    console.error("Failed to fetch homepage data for metadata", error);
+  }
 
-  return (
-    <div className="flex flex-col">
-      {/* 1. Hero Section */}
-      <HeroSection profile={profile} />
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: "/",
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+}
 
-      {/* 2. Selected Projects Section */}
-      <SelectedProjectsSection projects={projects} isLoading={isLoading} />
+export default async function Home() {
+  let initialData: HomepageData | null = null;
 
-      {/* 3. About Preview Section */}
-      <AboutSection profile={profile} />
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/api/v1/homepage`,
+      {
+        next: { revalidate: 3600 },
+      },
+    );
+    const response = await res.json();
+    initialData = response.data || null;
+  } catch (error) {
+    console.error("Failed to fetch homepage data", error);
+  }
 
-      {/* 4. Skills & Tech Stack Section */}
-      <SkillsSection skills={skills} isLoading={isLoading} />
-
-      {/* 5. Journey / Experience Section */}
-      <JourneySection experiences={experiences} isLoading={isLoading} />
-
-      {/* 6. Contact CTA Section */}
-      <ContactCtaSection profile={profile} socialLinks={socialLinks} />
-    </div>
-  );
+  return <HomeClient initialData={initialData} />;
 }

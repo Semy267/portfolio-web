@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, MapPin, Mail, Sparkles, CheckCircle2 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useGetProfile, useGetSkills } from "@/services/portfolioService";
 import { Button } from "@/components/ui/button";
 
@@ -12,7 +13,12 @@ export default function AboutPage() {
   const initial = profile?.name ? profile.name.charAt(0).toUpperCase() : "P";
 
   return (
-    <div className="py-16">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="py-16"
+    >
       <div className="container max-w-4xl space-y-12">
         {/* Page Header */}
         <div className="max-w-3xl space-y-4">
@@ -110,6 +116,6 @@ export default function AboutPage() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

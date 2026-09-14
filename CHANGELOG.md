@@ -2,6 +2,11 @@
 
 all notable changes to this project will be documented in this file.
 
+# [1.8.0] - 2026-09-14
+
+- (feat) - Phase 8 Polish: added Framer Motion animations to public frontend pages and sections.
+- (refactor) - Fixed accessibility issues and added missing aria-labels.
+
 # [1.7.0] - 2026-09-14
 
 - (feat) - Phase 5 Appearance: Added dynamic CSS variables injection in RootLayout from backend ThemeSettings.

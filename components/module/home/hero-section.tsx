@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Terminal, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Profile } from "@/types/portfolio";
 
@@ -17,7 +18,12 @@ export default function HeroSection({ profile }: HeroSectionProps) {
   const terminalUser = name ? name.toLowerCase().replace(/\s+/g, "") : "user";
 
   return (
-    <section className="py-16 md:py-24 border-b-2 border-border bg-background">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="py-16 md:py-24 border-b-2 border-border bg-background"
+    >
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 flex flex-col items-start gap-6">
@@ -112,6 +118,6 @@ export default function HeroSection({ profile }: HeroSectionProps) {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

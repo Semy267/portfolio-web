@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, MapPin, Mail, User, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Profile, Skill } from "@/types/portfolio";
 
@@ -19,7 +20,13 @@ export default function AboutSection({
   }
 
   return (
-    <section className="py-20 border-b-2 border-border bg-background">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="py-20 border-b-2 border-border bg-background"
+    >
       <div className="container space-y-12">
         <div className="max-w-3xl space-y-4">
           <div className="inline-block px-2.5 py-1 bg-accent-yellow text-foreground border-2 border-border shadow-hard text-xs font-mono font-bold uppercase">
@@ -94,6 +101,6 @@ export default function AboutSection({
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

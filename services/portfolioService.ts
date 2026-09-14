@@ -9,6 +9,7 @@ import {
   PaginatedResponse,
   HomepageData,
   PortfolioTheme,
+  SiteSettings,
 } from "@/types/portfolio";
 
 export const useGetProfile = () => {
@@ -58,6 +59,20 @@ export const useGetProjectDetail = (slug: string) => {
     queryKey: ["public", "project", slug],
     queryFn: () => Apis.projects.getBySlug(slug),
     enabled: !!slug,
+  });
+
+  return {
+    project: data?.data || null,
+    isLoading,
+    error,
+  };
+};
+
+export const useGetProjectPreview = (slug: string, secret?: string) => {
+  const { data, isLoading, error } = useQuery<IResponse<Project>>({
+    queryKey: ["public", "project", "preview", slug, secret],
+    queryFn: () => Apis.projects.getPreviewBySlug(slug, secret || ""),
+    enabled: !!slug && !!secret,
   });
 
   return {
@@ -135,6 +150,28 @@ export const useGetTheme = () => {
 export const fetchThemeSettings = async (): Promise<PortfolioTheme | null> => {
   try {
     const res = await Apis.theme.get();
+    return res.data || null;
+  } catch {
+    return null;
+  }
+};
+
+export const useGetSiteSettings = () => {
+  const { data, isLoading, error } = useQuery<IResponse<SiteSettings>>({
+    queryKey: ["public", "site-settings"],
+    queryFn: () => Apis.site.get(),
+  });
+
+  return {
+    siteSettings: data?.data || null,
+    isLoading,
+    error,
+  };
+};
+
+export const fetchSiteSettings = async (): Promise<SiteSettings | null> => {
+  try {
+    const res = await Apis.site.get();
     return res.data || null;
   } catch {
     return null;

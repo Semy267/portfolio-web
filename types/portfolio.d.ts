@@ -119,3 +119,15 @@ export interface PortfolioTheme {
   shadowY?: string | null;
   borderRadius?: string | null;
 }
+
+export interface SiteSettings {
+  id: string;
+  siteName?: string | null;
+  siteDescription?: string | null;
+  faviconMediaId?: string | null;
+  faviconUrl?: string | null;
+  ogImageMediaId?: string | null;
+  ogImageUrl?: string | null;
+  contactEmail?: string | null;
+  updatedAt?: string;
+}

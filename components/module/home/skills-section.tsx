@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2, Wrench } from "lucide-react";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Skill } from "@/types/portfolio";
@@ -20,7 +21,13 @@ export default function SkillsSection({
   );
 
   return (
-    <section className="py-20 border-b-2 border-border bg-card/50">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="py-20 border-b-2 border-border bg-card/50"
+    >
       <div className="container space-y-12">
         <div className="max-w-3xl space-y-3">
           <div className="inline-block px-2.5 py-1 bg-accent text-accent-foreground border-2 border-border shadow-hard text-xs font-mono font-bold uppercase">
@@ -87,6 +94,6 @@ export default function SkillsSection({
           </div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -8,6 +8,7 @@ import {
   PaginatedResponse,
   HomepageData,
   PortfolioTheme,
+  SiteSettings,
 } from "@/types/portfolio";
 
 export const Apis = {
@@ -40,6 +41,10 @@ export const Apis = {
       ),
     getBySlug: (slug: string) =>
       Http.get<IResponse<Project>>(`/api/v1/projects/${slug}`),
+    getPreviewBySlug: (slug: string, secret: string) =>
+      Http.get<IResponse<Project>>(`/api/v1/projects/preview/${slug}`, {
+        secret,
+      }),
   },
 
   skills: {
@@ -60,6 +65,10 @@ export const Apis = {
 
   theme: {
     get: () => Http.get<IResponse<PortfolioTheme>>("/api/v1/theme"),
+  },
+
+  site: {
+    get: () => Http.get<IResponse<SiteSettings>>("/api/v1/settings/site"),
   },
 
   todos: {

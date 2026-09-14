@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Mail, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Profile, SocialLink } from "@/types/portfolio";
 
@@ -17,7 +18,13 @@ export default function ContactCtaSection({
   const email = profile?.email;
 
   return (
-    <section className="py-20 bg-accent-yellow/15 border-b-2 border-border">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="py-20 bg-accent-yellow/15 border-b-2 border-border"
+    >
       <div className="container">
         <div className="border-4 border-border bg-card p-8 md:p-14 shadow-hard-xl space-y-8 text-center max-w-4xl mx-auto">
           <div className="inline-block px-3 py-1 bg-accent-coral text-white border-2 border-border shadow-hard text-xs font-mono font-bold uppercase">
@@ -75,6 +82,6 @@ export default function ContactCtaSection({
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

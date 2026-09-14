@@ -8,6 +8,7 @@ import {
   Send,
   CheckCircle2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useGetProfile, useGetSocialLinks } from "@/services/portfolioService";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +19,12 @@ export default function ContactPage() {
   const email = profile?.email;
 
   return (
-    <div className="py-16">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="py-16"
+    >
       <div className="container max-w-4xl space-y-12">
         {/* Page Header */}
         <div className="max-w-3xl space-y-4">
@@ -109,6 +115,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

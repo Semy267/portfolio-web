@@ -9,6 +9,7 @@ import {
   Search,
   Filter,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useGetProjects } from "@/services/portfolioService";
 import {
   Card,
@@ -52,7 +53,12 @@ export default function ProjectsPage() {
   }, [projects, selectedCategory]);
 
   return (
-    <div className="py-16">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="py-16"
+    >
       <div className="container space-y-12">
         {/* Page Header */}
         <div className="max-w-3xl space-y-4">
@@ -215,6 +221,7 @@ export default function ProjectsPage() {
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-foreground p-1"
                           title="Live Demo"
+                          aria-label="Live Demo"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
@@ -227,6 +234,6 @@ export default function ProjectsPage() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

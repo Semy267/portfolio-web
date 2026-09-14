@@ -13,13 +13,19 @@ const CImage = ({
   style,
   fill,
   rounded,
+  priority = false,
+  sizes,
 }: CImage) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const source = !isError && src != null;
   const link = source ? src : Default;
-  const props = fill ? { fill, sizes: "100%" } : { sizes: "100vw" };
+
+  const defaultSizes = fill ? "100%" : "100vw";
+  const imageSizes = sizes || defaultSizes;
+
+  const props = fill ? { fill, sizes: imageSizes } : { sizes: imageSizes };
 
   return (
     <div
@@ -48,7 +54,7 @@ const CImage = ({
         placeholder="empty"
         onError={() => setIsError(true)}
         onLoad={() => setIsLoading(false)}
-        priority
+        priority={priority}
         {...props}
       />
     </div>
