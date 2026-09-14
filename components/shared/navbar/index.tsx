@@ -3,20 +3,19 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
-import {
-  BookOpen,
-  ShieldCheck,
-  UserCheck,
-  LogOut,
-  Lock,
-} from "lucide-react";
+import { BookOpen, ShieldCheck, UserCheck, LogOut, Lock } from "lucide-react";
 import { useAuth } from "@/components/shared/auth/auth-context";
 import { LoginDialog } from "@/components/shared/auth/login-dialog";
 import { Button } from "@/components/ui/button";
+import { useGetProfile } from "@/services/portfolioService";
 
 export default function Navbar() {
   const { isSuperadmin, logout } = useAuth();
+  const { profile } = useGetProfile();
   const [loginOpen, setLoginOpen] = useState(false);
+
+  const initial = profile?.name ? profile.name.charAt(0).toUpperCase() : "P";
+  const brandName = profile?.name || "Portfolio";
 
   return (
     <>
@@ -26,12 +25,36 @@ export default function Navbar() {
             <div className="flex items-center gap-8">
               <Link href="/" className="flex items-center gap-2 group">
                 <div className="h-8 w-8 bg-foreground text-background flex items-center justify-center border-2 border-border shadow-hard">
-                  <BookOpen className="h-4 w-4 text-background" />
+                  <span className="font-bold text-sm font-mono text-background">
+                    {initial}
+                  </span>
                 </div>
-                <span className="text-xl font-bold tracking-tight text-foreground font-[family-name:var(--font-space-grotesk)]">
-                  My<span className="text-primary">Boilerplate</span>
+                <span className="text-xl font-bold tracking-tight text-foreground font-[family-name:var(--font-space-grotesk)] uppercase">
+                  {brandName}
+                  <span className="text-primary">.dev</span>
                 </span>
               </Link>
+
+              <nav className="hidden md:flex items-center gap-6">
+                <Link
+                  href="/projects"
+                  className="text-sm font-bold uppercase tracking-wide text-foreground hover:text-primary transition-colors"
+                >
+                  Projects
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-sm font-bold uppercase tracking-wide text-foreground hover:text-primary transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-sm font-bold uppercase tracking-wide text-foreground hover:text-primary transition-colors"
+                >
+                  Contact
+                </Link>
+              </nav>
             </div>
 
             <div className="flex items-center gap-3">

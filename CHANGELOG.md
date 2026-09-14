@@ -2,6 +2,13 @@
 
 all notable changes to this project will be documented in this file.
 
+# [1.6.0] - 2026-09-14
+
+- (feat) - Implemented personal neo-brutalist portfolio website consuming backend API dynamically.
+- (feat) - Built dynamic Hero, Selected Projects, About, Skills, Journey, and Contact CTA sections.
+- (feat) - Added project list and project detail routing with dynamic markdown rendering and hero media.
+- (refactor) - Standardized UI to use base `CImage` and `Skeleton` components.
+
 # [1.5.2] - 2026-09-11
 
 - (refactor) - Standardized all project mutations and queries to TanStack React Query hooks (`useCreateProject`, `useUploadEpub`, `useUpdateProject`, `useGetChapterPreview`, `useRecompileProject`) and removed deprecated `projectService` object.

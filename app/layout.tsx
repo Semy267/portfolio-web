@@ -4,6 +4,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Client from "@/shared/layout/client";
 import Navbar from "@/components/shared/navbar";
+import Footer from "@/components/shared/footer";
 import Query from "@/components/shared/layout/query";
 import { AuthProvider } from "@/components/shared/auth/auth-context";
 
@@ -21,9 +22,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "My Own Boilerplate",
+  title: "Personal Portfolio & Work Showcase",
   description:
-    "A custom Next.js boilerplate with modern tooling.",
+    "Personal portfolio showcasing software engineering projects, technical skills, and journey.",
 };
 
 export default function RootLayout({
@@ -34,13 +35,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${geistMono.variable} font-[family-name:var(--font-space-grotesk)] antialiased`}
+        className={`${spaceGrotesk.variable} ${geistMono.variable} font-[family-name:var(--font-space-grotesk)] antialiased min-h-screen flex flex-col`}
       >
         <Query>
           <AuthProvider>
             <Client>
               <Navbar />
-              {children}
+              <main className="flex-1 pt-16">{children}</main>
+              <Footer />
             </Client>
           </AuthProvider>
         </Query>
