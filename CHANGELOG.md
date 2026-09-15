@@ -7,6 +7,8 @@ all notable changes to this project will be documented in this file.
 - (feat) - Remove authentication logic from frontend public facing pages
 - (feat) - Phase 8 Polish: added Framer Motion animations to public frontend pages and sections.
 - (refactor) - Fixed accessibility issues and added missing aria-labels.
+- (refactor) - Adopted Cache Components by removing instant = false opt-outs.
+- (chore) - Upgraded to Next.js 16.3 and React 19 via Next.js codemods.
 
 # [1.7.0] - 2026-09-14
 
