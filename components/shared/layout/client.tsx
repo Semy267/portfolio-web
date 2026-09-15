@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import useAuthStore from "@/store";
+import store from "@/store";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import Loading from "../loading";
 import OverlayWrapper from "../overlay-wrapper";
@@ -9,7 +9,7 @@ import { ThemeProvider } from "../theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 export default function Client({ children }: { children: React.ReactNode }) {
-  const { loading, clearLoading, closeOverlay: closeDialog } = useAuthStore();
+  const { loading, clearLoading, closeOverlay: closeDialog } = store();
   const path = usePathname();
 
   useEffect(() => {

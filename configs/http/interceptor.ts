@@ -18,12 +18,6 @@ const createAxiosInstance = (baseURL: string = ""): AxiosInstance => {
 
 const applyInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.request.use(async (request) => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      if (token) {
-        request.headers.Authorization = `Bearer ${token}`;
-      }
-    }
     return request;
   });
   axiosInstance.interceptors.response.use((response) => response, errorHandler);

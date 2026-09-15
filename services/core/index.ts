@@ -12,17 +12,6 @@ import {
 } from "@/types/portfolio";
 
 export const Apis = {
-  auth: {
-    login: (payload: any) =>
-      Http.post<{ access_token: string; user: any }>(
-        "/api/auth/login",
-        payload,
-      ),
-    guestLogin: () =>
-      Http.post<{ access_token: string; user: any }>("/api/auth/guest", {}),
-    me: () => Http.get<any>("/api/auth/me"),
-  },
-
   profile: {
     get: () => Http.get<IResponse<Profile>>("/api/v1/profile"),
   },

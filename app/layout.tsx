@@ -6,7 +6,6 @@ import Client from "@/shared/layout/client";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import Query from "@/components/shared/layout/query";
-import { AuthProvider } from "@/components/shared/auth/auth-context";
 import {
   fetchThemeSettings,
   fetchSiteSettings,
@@ -98,24 +97,20 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {themeCss && (
-          <style
-            id="dynamic-theme"
-            dangerouslySetInnerHTML={{ __html: themeCss }}
-          />
-        )}
+        <style
+          id="dynamic-theme"
+          dangerouslySetInnerHTML={{ __html: themeCss || "" }}
+        />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} font-[family-name:var(--font-space-grotesk)] antialiased min-h-screen flex flex-col`}
       >
         <Query>
-          <AuthProvider>
-            <Client>
-              <Navbar />
-              <main className="flex-1 pt-16">{children}</main>
-              <Footer />
-            </Client>
-          </AuthProvider>
+          <Client>
+            <Navbar />
+            <main className="flex-1 pt-16">{children}</main>
+            <Footer />
+          </Client>
         </Query>
       </body>
     </html>
